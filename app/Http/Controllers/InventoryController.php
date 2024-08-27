@@ -42,6 +42,16 @@ class InventoryController extends Controller
         $inventory = Inventory::where('qr_code', $request->input('scannedQRCode'))->first();
 
         if ($inventory) {
+            session()->flash('inventory', $inventory);
+        } else {
+            return response()->json(['notfound' => true]);
+        }
+    }
+
+    public function showDetailFromSession()
+    {
+        if (session()->has('inventory')) {
+            $inventory = session('inventory');
             return view('detail', [
                 'name' => $inventory->name,
                 'brand' => $inventory->brand,
@@ -49,8 +59,6 @@ class InventoryController extends Controller
                 'year' => $inventory->year,
                 'id' => $inventory->id,
             ]);
-        } else {
-            return response()->json(['notfound' => true]);
         }
     }
 
@@ -74,8 +82,16 @@ class InventoryController extends Controller
         if ($inventory) {
             return response()->json(['found' => true]);
         } else {
+            session()->flash('request', $request->input('scannedQRCode'));
+        }
+    }
+
+    public function showAddFromSession()
+    {
+        if (session()->has('request')) {
+            $request = session('request');
             return view('add', [
-                'scannedQRCode' => $request->input('scannedQRCode'),
+                'scannedQRCode' => $request,
             ]);
         }
     }
@@ -107,11 +123,19 @@ class InventoryController extends Controller
         $inventory = Inventory::where('qr_code', $request->input('scannedQRCode'))->first();
 
         if ($inventory) {
+            session()->flash('inventory', $inventory);
+        } else {
+            return response()->json(['notfound' => true]);
+        }
+    }
+
+    public function showEditFromSession()
+    {
+        if (session()->has('inventory')) {
+            $inventory = session('inventory');
             return view('edit', [
                 'inventory' => $inventory,
             ]);
-        } else {
-            return response()->json(['notfound' => true]);
         }
     }
 

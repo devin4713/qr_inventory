@@ -124,9 +124,7 @@
                         if (response.notfound) {
                             $('#notFoundModal').modal('show');
                         } else {
-                            document.open();
-                            document.write(response);
-                            document.close();
+                            window.location.href = "{{ route('detail.session') }}";
                         }
                     },
                     error: function() {
@@ -145,9 +143,7 @@
                         if (response.notfound) {
                             $('#notFoundModal').modal('show');
                         } else {
-                            document.open();
-                            document.write(response);
-                            document.close();
+                            window.location.href = "{{ route('edit.session') }}";
                         }
                     },
                     error: function() {
@@ -166,9 +162,7 @@
                         if (response.found) {
                             $('#alreadySavedModal').modal('show');
                         } else {
-                            document.open();
-                            document.write(response);
-                            document.close();
+                            window.location.href = "{{ route('add.session') }}";
                         }
                     },
                     error: function() {

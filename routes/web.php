@@ -20,15 +20,18 @@ Route::get('/', function () {
 
 Route::get('/scan', [InventoryController::class, 'showScanCam'])->name('scan.cam');
 Route::post('/detail', [InventoryController::class, 'showDetailPage'])->name('detail.page');
+Route::get('/detail', [InventoryController::class, 'showDetailFromSession'])->name('detail.session');
 Route::get('/detail/{id}', [InventoryController::class, 'showDetailPage2'])->name('detail.page2');
 
 Route::get('/add', [InventoryController::class, 'showAddCam'])->name('add.cam');
 Route::post('/addpage', [InventoryController::class, 'showAddPage'])->name('add.page');
+Route::get('/addsession', [InventoryController::class, 'showAddFromSession'])->name('add.session');
 Route::post('/save', [InventoryController::class, 'saveInv'])->name('add.save');
 
 Route::get('/edit', [InventoryController::class, 'showEditCam'])->name('edit.cam');
 Route::get('/edit/{id}', [InventoryController::class, 'showEditPage'])->name('edit.page');
 Route::post('/edit', [InventoryController::class, 'showEditPage2'])->name('edit.page2');
+Route::get('/editsession', [InventoryController::class, 'showEditFromSession'])->name('edit.session');
 Route::post('/saveedit/{id}', [InventoryController::class, 'saveEdit'])->name('edit.save');
 
 Route::get('/list', [InventoryController::class, 'showList'])->name('list.page');
