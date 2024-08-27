@@ -124,7 +124,7 @@
                         if (response.notfound) {
                             $('#notFoundModal').modal('show');
                         } else {
-                            window.location.href = "{{ route('detail.session') }}";
+                            window.location.href = "{{ route('detail.page2', ['id' => ':id']) }}".replace(':id', response.id);
                         }
                     },
                     error: function() {
@@ -143,7 +143,7 @@
                         if (response.notfound) {
                             $('#notFoundModal').modal('show');
                         } else {
-                            window.location.href = "{{ route('edit.session') }}";
+                            window.location.href = "{{ route('edit.page', ['id' => ':id']) }}".replace(':id', response.id);
                         }
                     },
                     error: function() {
