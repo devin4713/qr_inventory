@@ -25,40 +25,42 @@
                                 <a href="{{ route('add.cam') }}" class="btn btn-success">Add New</a>
                             </div>
                         </div>
-                        <table class="table table-bordered table-striped">
-                            <thead class="table-dark">
-                                <tr>
-                                    <th>Nomor</th>
-                                    <th>Nama</th>
-                                    <th>Merk</th>
-                                    <th>Pemakai</th>
-                                    <th>Tahun</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($inventories as $index => $inventory)
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead class="table-dark">
                                     <tr>
-                                        <td>{{ $index + 1 }}</td>
-                                        <td>{{ $inventory->name }}</td>
-                                        <td>{{ $inventory->brand }}</td>
-                                        <td>{{ $inventory->user }}</td>
-                                        <td>{{ $inventory->year }}</td>
-                                        <td>
-                                            <a href="{{ route('edit.page', ['id' => $inventory->id]) }}"
-                                                class="btn btn-primary btn-sm">Edit</a>
-                                            <form action="{{ route('delete.process', ['id' => $inventory->id]) }}"
-                                                method="POST" style="display:inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Are you sure you want to delete this item?');">Delete</button>
-                                            </form>
-                                        </td>
+                                        <th>Nomor</th>
+                                        <th>Nama</th>
+                                        <th>Merk</th>
+                                        <th>Pemakai</th>
+                                        <th>Tahun</th>
+                                        <th>Action</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach ($inventories as $index => $inventory)
+                                        <tr>
+                                            <td>{{ $index + 1 }}</td>
+                                            <td>{{ $inventory->name }}</td>
+                                            <td>{{ $inventory->brand }}</td>
+                                            <td>{{ $inventory->user }}</td>
+                                            <td>{{ $inventory->year }}</td>
+                                            <td>
+                                                <a href="{{ route('edit.page', ['id' => $inventory->id]) }}"
+                                                    class="btn btn-primary btn-sm">Edit</a>
+                                                <form action="{{ route('delete.process', ['id' => $inventory->id]) }}"
+                                                    method="POST" style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm"
+                                                        onclick="return confirm('Are you sure you want to delete this item?');">Delete</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

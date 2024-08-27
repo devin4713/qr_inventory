@@ -37,10 +37,10 @@
                                 <div class="col-4 font-weight-bold">Tahun</div>
                                 <div class="col-8">: {{ $year }}</div>
                             </div>
-                            <div class="d-flex justify-content-between mt-4">
-                                <a href="{{ route('list.page') }}" class="btn btn-secondary">See Inventory List</a>
-                                <a href="{{ route('scan.cam') }}" class="btn btn-secondary">Scan Inventory</a>
-                                <a href="{{ route('edit.page', ['id' => $id]) }}" class="btn btn-secondary">Edit This Item</a>
+                            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mt-4">
+                                <a href="{{ route('list.page') }}" class="btn btn-secondary mb-2 mb-md-0 mx-md-1">Inventory List</a>
+                                <a href="{{ route('scan.cam') }}" class="btn btn-secondary mb-2 mb-md-0 mx-md-1">Scan Inventory</a>
+                                <a href="{{ route('edit.page', ['id' => $id]) }}" class="btn btn-secondary mx-md-1">Edit Item</a>
                             </div>
                         </div>
                     </div>
