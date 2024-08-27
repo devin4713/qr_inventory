@@ -97,9 +97,10 @@
 
         Instascan.Camera.getCameras().then(function(cameras) {
             if (cameras.length > 0) {
-                let rearCamera = cameras.find(camera => !camera.name.toLowerCase().includes('front'));
+                let rearCamera = cameras.find(camera => !camera.name.toLowerCase().includes('front') && !camera.name.toLowerCase().includes('webcam') && !camera.name.toLowerCase().includes('virtual'));
                 if (rearCamera) {
                     scanner.start(rearCamera);
+                    document.querySelector('.video-container').style.transform = 'scaleX(-1)';
                 } else {
                     scanner.start(cameras[0]);
                 }
