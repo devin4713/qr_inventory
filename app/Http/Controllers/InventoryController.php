@@ -59,6 +59,8 @@ class InventoryController extends Controller
                 'year' => $inventory->year,
                 'id' => $inventory->id,
             ]);
+        } else {
+            return redirect()->route('scan.cam');
         }
     }
 
@@ -93,6 +95,8 @@ class InventoryController extends Controller
             return view('add', [
                 'scannedQRCode' => $request,
             ]);
+        } else {
+            return redirect()->route('add.cam');
         }
     }
 
@@ -136,6 +140,8 @@ class InventoryController extends Controller
             return view('edit', [
                 'inventory' => $inventory,
             ]);
+        } else {
+            return redirect()->route('edit.cam');
         }
     }
 
