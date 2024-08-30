@@ -55,6 +55,12 @@
                     <li><a href="#features" class="nav-link" data-section="features">Features</a></li>
                     <li><a href="#about" class="nav-link" data-section="about">About</a></li>
                     <li><a href="https://github.com/devin4713">Contact</a></li>
+                    @auth
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                    <li><a href="#" id="logout-link">Logout</a></li>
+                    @endauth
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
@@ -113,6 +119,18 @@
                     }
                 });
             });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const logoutLink = document.getElementById('logout-link');
+            const logoutForm = document.getElementById('logout-form');
+
+            if (logoutLink && logoutForm) {
+                logoutLink.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    logoutForm.submit();
+                });
+            }
         });
     </script>
 

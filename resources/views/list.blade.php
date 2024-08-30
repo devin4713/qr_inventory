@@ -38,6 +38,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @if($inventories->isEmpty())
+                                    <tr>
+                                        <td colspan="6" class="text-center">No data here yet.</td>
+                                    </tr>
+                                    @else
                                     @foreach ($inventories as $index => $inventory)
                                         <tr>
                                             <td class="text-center">{{ $index + 1 }}</td>
@@ -56,6 +61,7 @@
                                             </td>
                                         </tr>
                                     @endforeach
+                                    @endif
                                 </tbody>
                             </table>
                         </div>

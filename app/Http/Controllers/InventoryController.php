@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Inventory;
+use Illuminate\Support\Facades\Auth;
 
 class InventoryController extends Controller
 {
@@ -30,7 +31,8 @@ class InventoryController extends Controller
 
     public function showList()
     {
-        $inventories = Inventory::all();
+        $authId = Auth::id();
+        $inventories = Inventory::where('auth_id', $authId)->get();
 
         return view('list', [
             'inventories' => $inventories,
@@ -39,7 +41,8 @@ class InventoryController extends Controller
 
     public function showDetailPage(Request $request)
     {
-        $inventory = Inventory::where('qr_code', $request->input('scannedQRCode'))->first();
+        $authId = Auth::id();
+        $inventory = Inventory::where('qr_code', $request->input('scannedQRCode'))->where('auth_id', $authId)->first();
 
         if ($inventory) {
             return response()->json(['id' => $inventory->id]);
@@ -50,7 +53,8 @@ class InventoryController extends Controller
 
     public function showDetailPage2($id)
     {
-        $inventory = Inventory::findOrFail($id);
+        $authId = Auth::id();
+        $inventory = Inventory::where('id', $id)->where('auth_id', $authId)->first();
 
         return view('detail', [
             'name' => $inventory->name,
@@ -63,7 +67,8 @@ class InventoryController extends Controller
 
     public function showAddPage(Request $request)
     {
-        $inventory = Inventory::where('qr_code', $request->input('scannedQRCode'))->first();
+        $authId = Auth::id();
+        $inventory = Inventory::where('qr_code', $request->input('scannedQRCode'))->where('auth_id', $authId)->first();
 
         if ($inventory) {
             return response()->json(['found' => true]);
@@ -86,12 +91,14 @@ class InventoryController extends Controller
 
     public function saveInv(Request $request)
     {
+        $authId = Auth::id();
         $inventory = new Inventory();
         $inventory->qr_code = $request->input('qr_code');
         $inventory->name = $request->input('name');
         $inventory->brand = $request->input('brand');
         $inventory->user = $request->input('user');
         $inventory->year = $request->input('year');
+        $inventory->auth_id = $authId;
         $inventory->save();
 
         return redirect()->route('list.page')->with('success', 'Inventory has been successfully added.');
@@ -99,7 +106,8 @@ class InventoryController extends Controller
 
     public function showEditPage($id)
     {
-        $inventory = Inventory::findOrFail($id);
+        $authId = Auth::id();
+        $inventory = Inventory::where('id', $id)->where('auth_id', $authId)->first();
 
         return view('edit', [
             'inventory' => $inventory,
@@ -108,7 +116,8 @@ class InventoryController extends Controller
 
     public function showEditPage2(Request $request)
     {
-        $inventory = Inventory::where('qr_code', $request->input('scannedQRCode'))->first();
+        $authId = Auth::id();
+        $inventory = Inventory::where('qr_code', $request->input('scannedQRCode'))->where('auth_id', $authId)->first();
 
         if ($inventory) {
             return response()->json(['id' => $inventory->id]);
@@ -119,7 +128,8 @@ class InventoryController extends Controller
 
     public function saveEdit(Request $request, $id)
     {
-        $inventory = Inventory::findOrFail($id);
+        $authId = Auth::id();
+        $inventory = Inventory::where('id', $id)->where('auth_id', $authId)->first();
 
         $inventory->name = $request->input('name');
         $inventory->brand = $request->input('brand');
@@ -132,7 +142,8 @@ class InventoryController extends Controller
 
     public function processDelete(Request $request, $id)
     {
-        $inventory = Inventory::findOrFail($id);
+        $authId = Auth::id();
+        $inventory = Inventory::where('id', $id)->where('auth_id', $authId)->first();
 
         $inventory->delete();
 

@@ -15,10 +15,12 @@
                         <h2>Welcome to Inventory Manager</h2>
                         <p>Manage your inventory with ease using QR code.</p>
                         <div class="d-flex mt-4 justify-content-center justify-content-md-start">
-                            <a href="{{ route('scan.cam') }}" class="download-btn"><i class="bi bi-camera"></i> <span>Scan
-                                    Inventory</span></a>
-                            <a href="{{ route('add.cam') }}" class="download-btn"><i class="bi bi-plus"></i> <span>Add
-                                    Inventory</span></a>
+                            @auth
+                            <a href="{{ route('scan.cam') }}" class="download-btn"><i class="bi bi-camera"></i> <span>Scan Inventory</span></a>
+                            <a href="{{ route('add.cam') }}" class="download-btn"><i class="bi bi-plus"></i> <span>Add Inventory</span></a>
+                            @else
+                            <a href="{{ route('login') }}" class="download-btn"><i class="bi bi-key"></i> <span>Login</span></a>
+                            @endauth
                         </div>
                     </div>
                 </div>
